@@ -13,10 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib import admin
 from django.urls import path, include
-from blog import views
 
 urlpatterns = [
-    path('', views.post_list, name='post_list'),
-    # assigning a view called 'post_list' to the ROOT URL
+    path('admin/', admin.site.urls),
+    # for all URLs that start with 'admin/', Django matches corresponding VIEW
+    path('', include('blog.urls')),
+    # Django will redirect everything that comes to 127.0.0.1:8000/ to 'blog.urls'
 ]
