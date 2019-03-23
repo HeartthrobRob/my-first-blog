@@ -17,6 +17,7 @@ from django.urls import path, include
 from blog import views
 
 urlpatterns = [
-    path('', views.post_list, name='post_list'),
+    # path('', views.post_list, name='post_list'),
+    path('', include('blog.urls'))
     # assigning a view called 'post_list' to the ROOT URL
 ]

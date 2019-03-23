@@ -1,69 +1,13 @@
-{% load static %}
-<html>
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <title>Rob's webpage</title>
-</head>
-<body>
-        <p>Hi there!</p>
-        <p>By logging into this website you acknowledge that your boyfriend</p>
-        <p>
-            <strong>Loves you the most</strong>
-        </p>
-        <p>You also owe him a soda</p>
-        <p>End.</p><br><br>
-      
-        <p><br>*******************************************************<br></p>
-        <div class="page-header">
-            <h1><a href="/">Hey Jess!</a></h1>
-        </div>
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My first post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div>
-        <p>***********************************************************</p>
-        <div>
-            {{ posts }}
-        </div>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
         <div class="post">
-            <p>published: {{ post.published_date }}</p>
-            <h2><a href="">{{ post.title }}</a></h2>
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
             <p>{{ post.text|linebreaksbr }}</p>
         </div>
-        <p>***********************************************************</p>
-       <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% for post in posts %}
-                        <div class="post">
-                            <div class="date">
-                                <p>published: {{ post.published_date }}</p>
-                            </div>
-                            <h2><a href="">{{ post.title }}</a></h2>
-                            <p>{{ post.text|linebreaksbr }}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        
-          <p>----------------------------------------------------------</p><br><br>
-        <p><strong>Testing different things below:</strong></p>
-        <a href='https://www.google.com.au'>Link To Google</a>
-        <div>
-        <strong>Bold emphasis</strong><br>
-        <em>OOOH SPOOKY EMPHASIS</em><br>
-        </div>
-        <h1>Big mega heading</h1>
-        <h2>The second biggest heading</h2>
-        <h3>Slightly bigger heading</h3>
-        <h4>Heading size 4</h4>
-        <h5>Heading size 5</h5>
-        <h6>Smallest heading</h6>
-        <ul><li>First thing</li><li>Second thing</li></ul>
-</body>
-</html>
+    {% endfor %}
+{% endblock %}
